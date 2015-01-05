@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FLAnimatedImage.h"
+
 @interface ViewController : UIViewController<UINavigationControllerDelegate,
     UIImagePickerControllerDelegate,
     NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *selectButton;
+@property (nonatomic, strong) FLAnimatedImageView *animatedImageView;
+@property (nonatomic, strong) IBOutlet UIView *containerView;
 @property (nonatomic, strong) IBOutlet UIButton *uploadButton;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) IBOutlet UITextView *textView;

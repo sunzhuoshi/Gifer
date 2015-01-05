@@ -54,6 +54,16 @@ void GFAlertError(NSError* error)
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.url = nil;
+    self.animatedImageView = [[FLAnimatedImageView alloc] init];
+    self.animatedImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.animatedImageView.clipsToBounds = YES;
+
+    [self.containerView addSubview:self.animatedImageView];
+    self.animatedImageView.frame = self.selectButton.frame;
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Sample" withExtension:@"GIF"];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,6 +160,7 @@ void GFAlertError(NSError* error)
         NSUInteger buffered = [rep getBytes:buffer fromOffset:0 length:size error:nil];
         self.imageData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         self.imageName = rep.filename;
+        self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:self.imageData];        
         [self dismissViewControllerAnimated:YES completion:NULL];
     } failureBlock:^(NSError *err) {
         [self dismissViewControllerAnimated:YES completion:NULL];

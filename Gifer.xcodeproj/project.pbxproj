@@ -10,6 +10,8 @@
 		657DF7F01A5A7ACC00F4D142 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657DF7EF1A5A7ACC00F4D142 /* AssetsLibrary.framework */; };
 		657DF7F21A5AAFE400F4D142 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657DF7F11A5AAFE400F4D142 /* Foundation.framework */; };
 		657DF7F41A5ABDE700F4D142 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657DF7F31A5ABDE700F4D142 /* UIKit.framework */; };
+		657DF7FA1A5AD09100F4D142 /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DF7F71A5AD09100F4D142 /* FLAnimatedImage.m */; };
+		657DF7FB1A5AD09100F4D142 /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DF7F91A5AD09100F4D142 /* FLAnimatedImageView.m */; };
 		65A8A8B11A5A6FC900A71EF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A8A8B01A5A6FC900A71EF4 /* main.m */; };
 		65A8A8B41A5A6FC900A71EF4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A8A8B31A5A6FC900A71EF4 /* AppDelegate.m */; };
 		65A8A8B71A5A6FC900A71EF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A8A8B61A5A6FC900A71EF4 /* ViewController.m */; };
@@ -34,6 +36,10 @@
 		657DF7EF1A5A7ACC00F4D142 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		657DF7F11A5AAFE400F4D142 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		657DF7F31A5ABDE700F4D142 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		657DF7F61A5AD09100F4D142 /* FLAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		657DF7F71A5AD09100F4D142 /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
+		657DF7F81A5AD09100F4D142 /* FLAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
+		657DF7F91A5AD09100F4D142 /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
 		65A8A8AB1A5A6FC900A71EF4 /* Gifer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gifer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A8A8AF1A5A6FC900A71EF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65A8A8B01A5A6FC900A71EF4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,9 +77,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		657DF7F51A5AD09100F4D142 /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				657DF7F61A5AD09100F4D142 /* FLAnimatedImage.h */,
+				657DF7F71A5AD09100F4D142 /* FLAnimatedImage.m */,
+				657DF7F81A5AD09100F4D142 /* FLAnimatedImageView.h */,
+				657DF7F91A5AD09100F4D142 /* FLAnimatedImageView.m */,
+			);
+			name = FLAnimatedImage;
+			path = libs/FLAnimatedImage/FLAnimatedImageDemo/FLAnimatedImage;
+			sourceTree = "<group>";
+		};
 		65A8A8A21A5A6FC900A71EF4 = {
 			isa = PBXGroup;
 			children = (
+				657DF7F51A5AD09100F4D142 /* FLAnimatedImage */,
 				657DF7F31A5ABDE700F4D142 /* UIKit.framework */,
 				657DF7F11A5AAFE400F4D142 /* Foundation.framework */,
 				657DF7EF1A5A7ACC00F4D142 /* AssetsLibrary.framework */,
@@ -235,7 +254,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				657DF7FA1A5AD09100F4D142 /* FLAnimatedImage.m in Sources */,
 				65A8A8B71A5A6FC900A71EF4 /* ViewController.m in Sources */,
+				657DF7FB1A5AD09100F4D142 /* FLAnimatedImageView.m in Sources */,
 				65A8A8B41A5A6FC900A71EF4 /* AppDelegate.m in Sources */,
 				65A8A8B11A5A6FC900A71EF4 /* main.m in Sources */,
 			);

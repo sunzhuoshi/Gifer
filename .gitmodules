@@ -1,0 +1,3 @@
+[submodule "libs/FLAnimatedImage"]
+	path = libs/FLAnimatedImage
+	url = https://github.com/sunzhuoshi/FLAnimatedImage.git

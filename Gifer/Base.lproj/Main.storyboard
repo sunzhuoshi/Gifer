@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oz6-5Y-n1s" userLabel="ImageView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oz6-5Y-n1s" userLabel="ContainerView">
                                 <rect key="frame" x="26" y="30" width="268" height="268"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVB-El-GQq" userLabel="Select">
@@ -31,21 +31,14 @@
                                             <action selector="doSelectButtonTouchUpInside:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aqe-6U-6mF"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample.GIF" translatesAutoresizingMaskIntoConstraints="NO" id="n2E-Sv-jP4">
-                                        <rect key="frame" x="0.0" y="0.0" width="268" height="268"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="dVB-El-GQq" firstAttribute="leading" secondItem="Oz6-5Y-n1s" secondAttribute="leading" id="0rV-tW-bRm"/>
-                                    <constraint firstItem="n2E-Sv-jP4" firstAttribute="top" secondItem="Oz6-5Y-n1s" secondAttribute="top" id="3Hu-m4-MMR"/>
                                     <constraint firstAttribute="trailing" secondItem="dVB-El-GQq" secondAttribute="trailing" id="Mdu-x9-J9T"/>
                                     <constraint firstAttribute="bottom" secondItem="dVB-El-GQq" secondAttribute="bottom" id="NfM-PY-nnm"/>
-                                    <constraint firstAttribute="bottom" secondItem="n2E-Sv-jP4" secondAttribute="bottom" id="VsT-Q2-nLH"/>
                                     <constraint firstAttribute="width" secondItem="Oz6-5Y-n1s" secondAttribute="height" multiplier="1:1" id="Ye2-t4-wTM"/>
                                     <constraint firstItem="dVB-El-GQq" firstAttribute="top" secondItem="Oz6-5Y-n1s" secondAttribute="top" id="mi7-jg-8J8"/>
-                                    <constraint firstAttribute="trailing" secondItem="n2E-Sv-jP4" secondAttribute="trailing" id="xWa-cz-Wkz"/>
-                                    <constraint firstItem="n2E-Sv-jP4" firstAttribute="leading" secondItem="Oz6-5Y-n1s" secondAttribute="leading" id="xZQ-cp-ata"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlu-T3-fN6" userLabel="Upload">
@@ -127,6 +120,7 @@
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="7cp-nP-O3o" id="aW5-IH-VlB"/>
+                        <outlet property="containerView" destination="Oz6-5Y-n1s" id="0sn-Ae-UJK"/>
                         <outlet property="cpButton" destination="Zdo-iz-gsD" id="zFK-Y3-aV5"/>
                         <outlet property="openButton" destination="jQu-yd-3G9" id="mQd-d9-dPz"/>
                         <outlet property="selectButton" destination="dVB-El-GQq" id="gMt-Dy-7CY"/>
@@ -140,7 +134,4 @@
             <point key="canvasLocation" x="177" y="130"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Sample.GIF" width="245" height="245"/>
-    </resources>
 </document>
