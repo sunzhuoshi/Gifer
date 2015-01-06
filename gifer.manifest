@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# version 1.0(NEVER CHANGE)
+# images
+*.png
+*.jpeg
+*.gif
+*.GIF
+
+FALLBACK:
+
+NETWORK:
+*
