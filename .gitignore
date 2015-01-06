@@ -3,3 +3,9 @@
 UserInterfaceState.xcuserstate
 
 xcuserdata
+
+/config.sh
+
+*.tar.gz
+
+/.idea/

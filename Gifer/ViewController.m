@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-NSString *UPLOAD_URL = @"http://192.168.199.194/~sunzhuoshi/upload/upload.php";
+NSString *UPLOAD_URL = @"http://sunzhuoshi.net/upload.php";
 
 
 void GFAlert2(NSString *title, NSString *message, NSString *buttonTitle, id<UIAlertViewDelegate> delegate)
@@ -160,7 +160,7 @@ void GFAlertError(NSError* error)
         NSUInteger buffered = [rep getBytes:buffer fromOffset:0 length:size error:nil];
         self.imageData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         self.imageName = rep.filename;
-        self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:self.imageData];        
+        self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:self.imageData];
         [self dismissViewControllerAnimated:YES completion:NULL];
     } failureBlock:^(NSError *err) {
         [self dismissViewControllerAnimated:YES completion:NULL];
@@ -187,7 +187,7 @@ void GFAlertError(NSError* error)
     if (connection == self.connection) {
         NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
         if (200 != res.statusCode) {
-            GFAlert(@"出错了！", [NSString stringWithFormat: @"状态码: %d", res.statusCode], @"知道了");
+            GFAlert(@"出错了！", [NSString stringWithFormat: @"状态码: %ld", (long)res.statusCode], @"知道了");
             self.connection = nil;
         }
     }

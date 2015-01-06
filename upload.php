@@ -2,11 +2,11 @@
 $UPLOAD_DIR = 'share/';
 $MAX_FILE_SIZE = 10000000;   // 10mb
 
-$ALLOW_FILE_TYPES = [
+$ALLOW_FILE_TYPES = array(
     'image/jpeg' => 1,
     'image/png' => 1,
     'image/gif' => 1
-];
+);
 
 date_default_timezone_set('UTC');
 
@@ -22,13 +22,13 @@ $ERROR_INVALID_FILE_TYPE = 2;
 $ERROR_INVALID_PARAM = 3;
 $ERROR_UNKNOWN = 4;
 
-$ERROR_MESSAGES = [
+$ERROR_MESSAGES = array(
     $ERROR_NO => 'ok',
     $ERROR_OVER_FILE_SIZE => "file size is larger than max($MAX_FILE_SIZE)",
     $ERROR_INVALID_FILE_TYPE => "invalid file type($file_type)",
     $ERROR_INVALID_PARAM => 'invalid parameter',
     $ERROR_UNKNOWN => 'unknown error'
-];
+);
 
 $result_code = $ERROR_NO;
 
@@ -45,7 +45,7 @@ else {
     if (move_uploaded_file($file['tmp_name'], $target)) {
         $referrer = $_SERVER['REQUEST_URI'];
         $endIndex = strrpos($referrer, '/');
-        if ($endIndex) {
+        if (0 <= $endIndex) {
             $referrer = substr($referrer, 0, $endIndex + 1);
             $file_url = 'http://' . $_SERVER['SERVER_NAME'] . $referrer . $target;
         }
@@ -58,10 +58,10 @@ else {
     }
 }
 
-$response = [
+$response = array(
     'code' => $result_code,
     'msg' => $ERROR_MESSAGES[$result_code]
-];
+);
 
 if ($result_code == $ERROR_NO) {
     $response['url'] = $file_url;
