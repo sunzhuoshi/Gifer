@@ -11,7 +11,8 @@ $ALLOW_FILE_TYPES = array(
 date_default_timezone_set('UTC');
 
 $file = $_FILES['file'];
-$target = $UPLOAD_DIR . basename($file['name']);
+$file_name = basename($file['name']);
+$target = $UPLOAD_DIR . $file_name;
 $file_size = $file['size'];
 $file_type = $file['type'];
 $file_url = '';
@@ -47,7 +48,7 @@ else {
         $endIndex = strrpos($referrer, '/');
         if (0 <= $endIndex) {
             $referrer = substr($referrer, 0, $endIndex + 1);
-            $file_url = 'http://' . $_SERVER['SERVER_NAME'] . $referrer . $target;
+            $file_url = 'http://'. $_SERVER['SERVER_NAME'] . $referrer . 'view.php?id=' . $file_name;
         }
         else {
             $result_code = $ERROR_UNKNOWN;
