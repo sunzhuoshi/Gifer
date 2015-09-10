@@ -11,8 +11,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ImageIO/ImageIO.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-NSString *UPLOAD_URL = @"http://sunzhuoshi.net/upload.php";
+NSString *UPLOAD_URL = @"http://gifer.cn/upload.php";
 
 
 void GFAlert2(NSString *title, NSString *message, NSString *buttonTitle, id<UIAlertViewDelegate> delegate)
@@ -43,6 +45,8 @@ void GFAlertError(NSError* error)
 @property (nonatomic, copy) NSString* imageName;
 @property (nonatomic, strong) NSURLConnection *connection;
 
+- (void)setImageViewData:(NSData *)imageData;
+
 @end
 
 @implementation ViewController
@@ -56,14 +60,15 @@ void GFAlertError(NSError* error)
     self.url = nil;
     self.animatedImageView = [[FLAnimatedImageView alloc] init];
     self.animatedImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.animatedImageView.clipsToBounds = YES;
 
     [self.containerView addSubview:self.animatedImageView];
-    self.animatedImageView.frame = self.selectButton.frame;
-    
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"Sample" withExtension:@"GIF"];
     NSData *data = [NSData dataWithContentsOfURL:url];
-    self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
+    [self setImageViewData: data];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.animatedImageView.frame = self.selectButton.frame;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +145,23 @@ void GFAlertError(NSError* error)
     GFAlert(@"开发中...", nil, @"好的");
 }
 
+- (void)setImageViewData:(NSData *)imageData {
+    CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+    if (imageSource) {
+        CFStringRef imageSourceContainerType = CGImageSourceGetType(imageSource);
+        BOOL isGIF = UTTypeConformsTo(imageSourceContainerType, kUTTypeGIF);
+        if (isGIF) {
+            self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:imageData];
+        }
+        else {
+            self.animatedImageView.image = [UIImage imageWithData:imageData];
+        }
+    }
+    else {
+        // TODO: alert
+    }
+}
+
 - (void)showImagePicker
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -160,7 +182,7 @@ void GFAlertError(NSError* error)
         NSUInteger buffered = [rep getBytes:buffer fromOffset:0 length:size error:nil];
         self.imageData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         self.imageName = rep.filename;
-        self.animatedImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:self.imageData];
+        [self setImageViewData:self.imageData];
         [self dismissViewControllerAnimated:YES completion:NULL];
     } failureBlock:^(NSError *err) {
         [self dismissViewControllerAnimated:YES completion:NULL];
