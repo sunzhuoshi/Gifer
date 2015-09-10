@@ -68,4 +68,5 @@ if ($result_code == $ERROR_NO) {
     $response['url'] = $file_url;
 }
 
-echo json_encode($response, JSON_UNESCAPED_SLASHES);
+// JSON_UNESCAPED_SLASHES not supported by php 5.3;
+echo json_encode($response, 0);

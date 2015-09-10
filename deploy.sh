@@ -14,17 +14,17 @@ if [ ! $upload_dir ]; then
     exit 1
 fi
 
-tar_file='gifer.tar.gz';
+tar_file='gifer.tar.gz'
 
 echo "removing hidden file(s)..."
 find . -name ".DS_Store"  | xargs rm -f
 
 echo "packaging..."
-tar -zcf $tar_file gifer.manifest test.html upload.php view.php
+tar -zcf $tar_file gifer.manifest index.html test.html upload.php view.php share
 
 echo "uploading..."
 scp $tar_file $upload_user@$upload_server:$upload_dir/
 
 echo "deploying..."
-deploy_cmd="cd $upload_dir; rm -rf `ls | grep -v .tar.gz`; tar -xvf $tar_file; ls"
+deploy_cmd="cd $upload_dir; tar -xvf $tar_file; rm -f *.tar.gz; ls"
 ssh $upload_user@$upload_server $deploy_cmd
