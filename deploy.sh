@@ -20,7 +20,7 @@ echo "removing hidden file(s)..."
 find . -name ".DS_Store"  | xargs rm -f
 
 echo "packaging..."
-tar -zcf $tar_file gifer.manifest index.html test.html upload.php view.php share
+tar -zcf $tar_file gifer.manifest index.html test.html upload.php view.php share .htaccess
 
 echo "uploading..."
 scp $tar_file $upload_user@$upload_server:$upload_dir/
