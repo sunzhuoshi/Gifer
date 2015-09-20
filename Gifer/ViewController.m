@@ -14,6 +14,7 @@
 #import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
+//NSString *UPLOAD_URL = @"http://192.168.101/gifer/upload.php";
 NSString *UPLOAD_URL = @"http://gifer.cn/upload.php";
 
 
@@ -177,7 +178,7 @@ void GFAlertError(NSError* error)
     ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
     [assetLibrary assetForURL:[info valueForKey:UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
         ALAssetRepresentation *rep = [asset defaultRepresentation];
-        NSUInteger size = (NSInteger)rep.size;
+        NSUInteger size = (NSUInteger)rep.size;
         Byte *buffer = (Byte*)malloc(size);
         NSUInteger buffered = [rep getBytes:buffer fromOffset:0 length:size error:nil];
         self.imageData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
@@ -219,10 +220,11 @@ void GFAlertError(NSError* error)
 {
     if (connection == self.connection) {
         NSError *error;
+        //NSLog(@"data: %s", data.bytes);
         id res = [NSJSONSerialization JSONObjectWithData: data options:0 error:&error];
         if (error) {
             GFAlertError(error);
-                }
+        }
         else {
             NSNumber *code = [res objectForKey:@"code"];
             NSString *msg = [res objectForKey:@"msg"];
