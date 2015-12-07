@@ -10,6 +10,7 @@
         #image_wrapper {
             margin: 10px auto;
             max-width: 300px;
+            text-align: center;
         }
         img {
             width: 100%;
@@ -25,8 +26,21 @@
 
     if (isset($queries['id'])) {
         $id = $queries['id'];
-        $src = ROOT_DIR . $id;
-        echo "<img src=\"$src\"/>";
+        $image_file_path = ROOT_DIR . $id;
+        $image_comment = '';
+        $image_comment_file_path = $image_file_path . '.txt';
+
+        // comment
+        $image_comment_file = fopen($image_comment_file_path, 'r');
+        if ($image_comment_file) {
+            $image_comment = fread($image_comment_file, filesize($image_comment_file_path));
+            fclose($image_comment_file);
+        }
+        if ($image_comment) {
+            echo "<div style='padding: 5px'>$image_comment</div>";
+        }
+        // image
+        echo "<img src=\"$image_file_path\"/>";
     }
     else {
         echo 'Invalid parameter(s)';

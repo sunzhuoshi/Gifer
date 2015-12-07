@@ -12,14 +12,16 @@
 
 @interface ViewController : UIViewController<UINavigationControllerDelegate,
     UIImagePickerControllerDelegate,
-    NSURLConnectionDataDelegate>
+    NSURLConnectionDataDelegate,
+    UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *selectButton;
 @property (nonatomic, strong) FLAnimatedImageView *animatedImageView;
 @property (nonatomic, strong) IBOutlet UIView *containerView;
 @property (nonatomic, strong) IBOutlet UIButton *uploadButton;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (nonatomic, strong) IBOutlet UITextView *urlTextView;
+@property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 
 @property (nonatomic, strong) IBOutlet UIButton *openButton;
 @property (nonatomic, strong) IBOutlet UIButton *cpButton;

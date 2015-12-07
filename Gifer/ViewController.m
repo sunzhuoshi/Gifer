@@ -14,7 +14,7 @@
 #import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-//NSString *UPLOAD_URL = @"http://192.168.101/gifer/upload.php";
+//NSString *UPLOAD_URL = @"http://192.168.11/gifer/upload.php";
 NSString *UPLOAD_URL = @"http://gifer.cn/upload.php";
 
 
@@ -97,15 +97,25 @@ void GFAlertError(NSError* error)
         [postData setData:imageData];
         
         NSMutableData *body = [NSMutableData data];
-
+        // image file
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary]
                           dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", self.imageName]
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image_file\"; filename=\"%@\"\r\n", self.imageName]
                           dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Type: image/%@\r\n\r\n", [[self.imageName pathExtension] lowercaseString]]
                           dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:postData];
         [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        // image comment
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary]
+                          dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image_comment\"\r\n\r\n"]
+                          dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[self.commentTextField.text dataUsingEncoding:NSUTF8StringEncoding]];
+        //[body appendData:[[NSString stringWithUTF8String:"test1"] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"%@", self.commentTextField.text);
+        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        
         [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         
         [requestImg setHTTPBody:body];
@@ -220,9 +230,9 @@ void GFAlertError(NSError* error)
 {
     if (connection == self.connection) {
         NSError *error;
-        //NSLog(@"data: %s", data.bytes);
         id res = [NSJSONSerialization JSONObjectWithData: data options:0 error:&error];
         if (error) {
+            NSLog(@"data: %s", data.bytes);
             GFAlertError(error);
         }
         else {
@@ -250,10 +260,12 @@ void GFAlertError(NSError* error)
         self.url = nil;
         [self.activityIndicatorView startAnimating];
         self.uploadButton.enabled = NO;
+        self.commentTextField.enabled = NO;
     }
     else {
         [self.activityIndicatorView stopAnimating];
         self.uploadButton.enabled = YES;
+        self.commentTextField.enabled = YES;
     }
 }
 
@@ -261,19 +273,25 @@ void GFAlertError(NSError* error)
 {
     _url = [url copy];
     if (self.url) {
-        self.textView.text = self.url;
-        self.textView.hidden = NO;
+        self.urlTextView.text = self.url;
+        self.urlTextView.hidden = NO;
         self.shareButton.hidden = NO;
         self.cpButton.hidden = NO;
         self.openButton.hidden = NO;
     }
     else {
-        self.textView.text = @"";
-        self.textView.hidden = YES;
+        self.urlTextView.text = @"";
+        self.urlTextView.hidden = YES;
         self.shareButton.hidden = YES;
         self.cpButton.hidden = YES;
         self.openButton.hidden = YES;
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end
