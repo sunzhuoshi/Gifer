@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+const NSString *WE_CHAT_APP_ID = @"wx30ac065f6538f12a";
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [WXApi registerApp:WE_CHAT_APP_ID];
     return YES;
 }
 
@@ -40,6 +43,22 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+-(void) onReq:(BaseReq*)req {
+    
+}
+
+-(void) onResp:(BaseResp*)resp {
+    
 }
 
 @end

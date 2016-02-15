@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "WXApi.h"
 
 //NSString *UPLOAD_URL = @"http://192.168.11/gifer/upload.php";
 NSString *UPLOAD_URL = @"http://gifer.cn/upload.php";
@@ -47,6 +48,7 @@ void GFAlertError(NSError* error)
 @property (nonatomic, strong) NSURLConnection *connection;
 
 - (void)setImageViewData:(NSData *)imageData;
+- (UIImage *)getThumbImage;
 
 @end
 
@@ -153,8 +155,31 @@ void GFAlertError(NSError* error)
 
 - (IBAction)doShareButtonTouchUpInside:(id)sender
 {
-    GFAlert(@"开发中...", nil, @"好的");
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    WXMediaMessage *message = [[WXMediaMessage alloc] init];
+    
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = self.url;
+
+    message.title = @"gifer.cn - iOS分享GIF利器";
+    message.description = self.commentTextField.text;
+    message.mediaObject = ext;    
+    [message setThumbImage: [self getThumbImage]];
+    
+    req.message = message;
+    req.bText = NO;
+    [WXApi sendReq: req];
 }
+
+- (UIImage *)getThumbImage {
+    UIImage *result = self.animatedImageView.image;
+    
+    if (!result) {
+        result = self.animatedImageView.animatedImage.posterImage;
+    }
+    return result;
+};
 
 - (void)setImageViewData:(NSData *)imageData {
     CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
